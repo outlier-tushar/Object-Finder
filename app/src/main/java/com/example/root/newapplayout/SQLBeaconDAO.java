@@ -43,7 +43,7 @@ public class SQLBeaconDAO {
         return details.getSName();
 
     }
-    public void deleteDevice(String dev_name){database.delete("device_details", "NAME="+dev_name,null);}
+    public void deleteDevice(String dev_name){database.delete("device_details", "SNAME= '"+dev_name+"'",null);}
 
     public List getDetails(){
         List deviceDetails = new ArrayList();

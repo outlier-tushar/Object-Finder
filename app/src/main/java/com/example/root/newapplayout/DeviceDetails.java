@@ -36,7 +36,7 @@ public class DeviceDetails extends AppCompatActivity {
             alert = new AlertDialog.Builder(this);
 
             Intent intent = getIntent();
-            String rec_name = intent.getStringExtra("dev_name");
+            final String rec_name = intent.getStringExtra("dev_name");
 
             dao = new SQLBeaconDAO(this);
 
@@ -53,11 +53,22 @@ public class DeviceDetails extends AppCompatActivity {
             lv.setAdapter(new DeviceDetailsPopulator(DeviceDetails.this, ids, details, sname));
 
             Button edit_button = (Button)findViewById(R.id.edit_button);
+            Button delete_button = (Button)findViewById(R.id.delete_button);
 
             edit_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     deviceNameEditor();
+                }
+            });
+
+            delete_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dao.deleteDevice(rec_name);
+                    Toast.makeText(DeviceDetails.this,"Device deleted successfully", Toast.LENGTH_LONG).show();
+                    Intent returnIntent = new Intent(DeviceDetails.this, SavedDevices.class);
+                    DeviceDetails.this.startActivity(returnIntent);
                 }
             });
         }
@@ -75,10 +86,7 @@ public class DeviceDetails extends AppCompatActivity {
             final EditText edittext = new EditText(DeviceDetails.this);
             alert.setTitle("Change Device Name?");
             alert.setMessage("Enter Device Name :");
-
-
             alert.setView(edittext);
-
             alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     String editedName = edittext.getText().toString();
@@ -87,17 +95,17 @@ public class DeviceDetails extends AppCompatActivity {
                     //dao.update(sbb,atname);
                     String rec_sname = dao.update(sbb, atname);
                     backData = rec_sname;
-                    populateDetails(rec_sname);
-                    lv.setAdapter(new DeviceDetailsPopulator(DeviceDetails.this, ids, details, rec_sname));
-                    /*if(!rec_sname.isEmpty())
+                    if(!editedName.isEmpty())
                     {
-                        lv.setAdapter(new DeviceDetailsPopulator(DeviceDetails.this, ids, details, sname));
-                        Intent intent = getIntent();
-                        finish();
-                        startActivity(intent);
-                    }*/
-                    //populateDetails(dao.update(sbb,atname));
-                    Toast.makeText(DeviceDetails.this,editedName,Toast.LENGTH_SHORT).show();
+                     populateDetails(rec_sname);
+                    lv.setAdapter(new DeviceDetailsPopulator(DeviceDetails.this, ids, details, rec_sname));
+                    Toast.makeText(DeviceDetails.this,"Changed Name: "+editedName,Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(DeviceDetails.this, "Enter a valid device name", Toast.LENGTH_LONG).show();
+                        dialog.dismiss();
+                    }
                 }
             });
 
@@ -120,7 +128,6 @@ public class DeviceDetails extends AppCompatActivity {
             Cursor cursor      = db.rawQuery(selectQuery, null);
             //int i=0;
             if (cursor.moveToFirst()) {
-                Toast.makeText(this,"Chaching",Toast.LENGTH_LONG).show();
                 do {
                     sname = cursor.getString(cursor.getColumnIndex("SNAME"));
                     details.add(sname);
