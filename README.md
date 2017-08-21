@@ -18,6 +18,7 @@ Since there is no default library provided by Google to detect iBeacons, I've us
 <a href="https://github.com/AltBeacon/android-beacon-library"> AltBeacon </a> library developed by <a href="https://github.com/davidgyoung"> davidyoung</a> to detect and interact with nearby Beacons.
 
 <h4>Screenshots</h4>
+
 <img src = "https://www.dropbox.com/s/r6bqpmj7cecb0yj/searching.png?raw=true" height="640" width="350">
 <img src = "https://www.dropbox.com/s/ytxiqndd8vdmq3c/found-keys.png?raw=true" height="640" width="350">
 <img src = "https://www.dropbox.com/s/2is106g8j414rxf/distance-est.png?raw=true" height="640" width="350">
