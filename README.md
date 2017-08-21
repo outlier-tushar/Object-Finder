@@ -15,7 +15,7 @@ The device dimensions are roughly about 4 cm x 3.5 cm.
 The app allows Android devices to search nearby Beacons and estimate distances.
 
 Since there is no default library provided by Google to detect iBeacons, I've used 
-<a href="https://github.com/AltBeacon/android-beacon-library"> AltBeacon </a> library developed by <a href="https://github.com/davidgyoung"> davidyoung</a> to detect and interact with nearby Beacons.
+<a href="https://github.com/AltBeacon/android-beacon-library">AltBeacon</a> library developed by <a href="https://github.com/davidgyoung"> davidyoung</a> to detect and interact with nearby Beacons.
 
 <h4>Screenshots</h4>
 <table style="width:100%">
