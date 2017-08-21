@@ -29,3 +29,6 @@ Since there is no default library provided by Google to detect iBeacons, I've us
   </tr>  
 </table>
 
+<h3>IMPORTANT:</h3>
+<h4>THE APP CAN ONLY DETECT iBeacons. NO OTHER CONFIGURATION WILL BE DETECTED OR DISPLAYED IN THE APP</h4>
+
